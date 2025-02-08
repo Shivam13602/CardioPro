@@ -10,16 +10,30 @@ import {
   Platform,
   ScrollView,
   Dimensions,
+  Button,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAuth } from '../../context/auth/AuthContext';
 
 const { width } = Dimensions.get('window');
 
 const Signup = ({ navigation }) => {
+  const { signup } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState(null);
+
+  const handleSignup = async () => {
+    try {
+      await signup(email, password);
+      // Navigate to Home or appropriate screen after signup
+      navigation.navigate('Home');
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -85,7 +99,9 @@ const Signup = ({ navigation }) => {
               />
             </View>
 
-            <TouchableOpacity style={styles.signupButton}>
+            {error && <Text style={styles.errorText}>{error}</Text>}
+
+            <TouchableOpacity style={styles.signupButton} onPress={handleSignup}>
               <Text style={styles.signupButtonText}>Create Account</Text>
             </TouchableOpacity>
 
@@ -179,6 +195,11 @@ const styles = StyleSheet.create({
     color: '#E94B4B',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginBottom: 20,
   },
 });
 

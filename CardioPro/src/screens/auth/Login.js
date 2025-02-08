@@ -10,14 +10,28 @@ import {
   Platform,
   ScrollView,
   Dimensions,
+  Button,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAuth } from '../../context/auth/AuthContext';
 
 const { width } = Dimensions.get('window');
 
 const Login = ({ navigation }) => {
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+
+  const handleLogin = async () => {
+    try {
+      await login(email, password);
+      // Navigate to Home or next appropriate screen after login
+      navigation.navigate('Home');
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -65,7 +79,7 @@ const Login = ({ navigation }) => {
               <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.loginButton}>
+            <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
 
@@ -75,6 +89,8 @@ const Login = ({ navigation }) => {
                 <Text style={styles.signupLink}>Sign Up</Text>
               </TouchableOpacity>
             </View>
+
+            {error && <Text style={styles.errorText}>{error}</Text>}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -167,6 +183,11 @@ const styles = StyleSheet.create({
     color: '#E94B4B',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 10,
   },
 });
 
