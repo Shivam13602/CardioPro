@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "208170132638",
+    "project_id": "cardiopro-f4448",
+    "storage_bucket": "cardiopro-f4448.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208170132638:android:ad31afd3357911cc4a478f",
+        "android_client_info": {
+          "package_name": "giga.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClvlMwcu-K5VUsMSZyZVxQQS87pfhNLws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

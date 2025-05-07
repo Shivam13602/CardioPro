@@ -1,0 +1,63 @@
+{
+  "expo": {
+    "name": "CardioPro",
+    "slug": "CardioPro",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "giga",
+      "googleServicesFile": "./firebase-config/GoogleService-Info.plist",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "CardioPro needs your location to track your workouts, calculate distance, and visualize your route.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "CardioPro needs your location to track your workouts even when the app is in the background.",
+        "NSLocationAlwaysUsageDescription": "CardioPro needs your location to track your workouts even when the app is in the background.",
+        "NSMotionUsageDescription": "CardioPro needs access to motion data for accurate step counting and activity tracking.",
+        "NSHealthShareUsageDescription": "CardioPro uses health data to provide more accurate workout metrics and save your workouts to Apple Health.",
+        "NSHealthUpdateUsageDescription": "CardioPro will save your workout data to Apple Health to keep all your fitness information in one place."
+      }
+    },
+    "android": {
+      "package": "giga.com",
+      "googleServicesFile": "./firebase-config/google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "ACCESS_FINE_LOCATION", 
+        "ACCESS_COARSE_LOCATION", 
+        "ACCESS_BACKGROUND_LOCATION",
+        "ACTIVITY_RECOGNITION",
+        "BODY_SENSORS",
+        "FOREGROUND_SERVICE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow CardioPro to use your location to track your workouts.",
+          "isAndroidBackgroundLocationEnabled": true
+        }
+      ],
+      [
+        "expo-sensors",
+        {
+          "motionPermission": "Allow CardioPro to access your device's accelerometer for step counting."
+        }
+      ]
+    ]
+  }
+}
