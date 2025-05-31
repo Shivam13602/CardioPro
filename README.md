@@ -1,121 +1,118 @@
-﻿# CardioPro Fitness App
+# CardioPro Fitness App
 
-A fitness tracking application for monitoring workouts, following training programs, and achieving fitness goals.
+<img src="assets/icon.png" alt="CardioPro Logo" width="120" height="120" />
 
-## Setup Instructions
+A comprehensive fitness tracking application designed to help users monitor their cardio workouts, set goals, and make consistent progress in their fitness journey.
 
-1. Install dependencies:
+## Features
+
+- **GPS Workout Tracking**: Track your runs, walks, cycling, and HIIT workouts with real-time GPS mapping
+- **User-Specific Workout History**: View your workout history with detailed statistics and metrics
+- **Training Programs**: Follow structured workout programs tailored to different fitness levels
+- **Offline Functionality**: Continue tracking workouts even without internet connection
+- **Personalized Profiles**: Maintain your fitness profile with goals and stats
+- **Visual Progress**: See your routes and performance metrics for each workout
+- **Achievement System**: Earn achievements as you reach fitness milestones
+
+## Screenshots
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+  <img src="assets/screenshots/home.png" alt="Home Screen" width="200" />
+  <img src="assets/screenshots/tracking.png" alt="Workout Tracking" width="200" />
+  <img src="assets/screenshots/programs.png" alt="Training Programs" width="200" />
+  <img src="assets/screenshots/stats.png" alt="Workout Stats" width="200" />
+</div>
+
+## Technical Details
+
+- Built with React Native and Expo for cross-platform compatibility
+- Firebase Authentication for secure user management
+- Firestore Database for cloud data storage
+- AsyncStorage for local data persistence when offline
+- React Navigation for seamless screen transitions
+- Expo Location API for precise GPS tracking
+- React Native Maps for route visualization
+- Expo Sensors for step counting and activity detection
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or newer)
+- npm or yarn
+- Expo CLI
+- Firebase account (for authentication and database)
+- Google Maps API key
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Shivam13602/CardioPro.git
+   cd CardioPro
    ```
+
+2. Install dependencies:
+   ```bash
    npm install
+   # or
+   yarn install
    ```
 
-2. Start the development server:
-   ```
+3. Set up environment variables:
+   - Copy `.env.example` to `.env`
+   - Fill in your Firebase configuration and Google Maps API key
+
+4. Start the development server:
+   ```bash
    npx expo start
    ```
 
-3. Start with a clean cache (recommended if you're having issues):
-   ```
-   npx expo start -c
-   ```
+5. Run on a device or emulator:
+   - Scan the QR code with the Expo Go app on your phone
+   - Press 'a' in the terminal to open in an Android emulator
+   - Press 'i' to open in an iOS simulator
 
-4. For Windows PowerShell users, use the included script:
-   ```
-   .\start.ps1
-   ```
-
-## Common Issues and Solutions
-
-### Firebase Permission Issues
-
-If you're seeing errors related to "Missing or insufficient permissions" in the app, follow these steps:
-
-1. Check your Firebase rules in the Firebase console.
-2. Make sure your rules allow read/write access for authenticated users:
+## Project Structure
 
 ```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth != null;
-    }
-  }
-}
+CardioPro/
+├── assets/             # Images, fonts, and static resources
+├── src/
+│   ├── components/     # Reusable UI components
+│   ├── contexts/       # React Context providers
+│   ├── screens/        # App screens
+│   ├── services/       # API and service integrations
+│   ├── utils/          # Utility functions
+│   └── config/         # Configuration files
+├── App.js              # App entry point
+└── firebase-config/    # Firebase configuration files
 ```
 
-3. The app has fallback mechanisms to use local data when Firebase access fails, but for the best experience, fix your Firebase permissions.
+## API Keys
 
-### Firebase Index Errors
+The app requires the following API keys that need to be configured in your `.env` file:
 
-If you see errors like "The query requires an index", you have two options:
-
-1. **Create the required index (Recommended)**: 
-   - Click on the URL provided in the error message
-   - Sign in to your Firebase Console
-   - Confirm the index creation
-   - Wait for the index to be built (usually takes a few minutes)
-
-2. **Use the app with current implementation**:
-   - The app has been updated to avoid requiring composite indexes
-   - Queries now use client-side sorting which may be slightly less efficient
-   - This is a good temporary solution while you set up proper indexes
-
-If you want to manually create indexes for better performance:
-
-```
-// Create index for user_programs collection
-Fields to index:
-- userId (Ascending)
-- enrolledAt (Descending)
-
-// Create index for training_programs collection
-Fields to index:
-- createdAt (Descending)
-```
-
-### Recent Fixes (Update Log)
-
-#### v1.0.1 - Firebase and Workout Tracking Fixes
-
-- **Fixed Firebase Index Issues**: Modified queries in TrainingProgramContext.js to avoid requiring composite indexes by implementing client-side sorting
-- **Fixed startTimeRef Error**: Added missing startTimeRef declaration and initialization in WorkoutTracking.js
-- **Enhanced Error Handling**: Improved error handling for Firebase access issues with better fallbacks
-
-### Package Version Issues
-
-If you see warnings about package versions:
-
-```
-npx expo install expo@~52.0.41 react-native@0.76.7 expo-location@~18.0.8 react-native-gesture-handler@~2.20.2 react-native-safe-area-context@4.12.0 react-native-screens@~4.4.0 @react-native-async-storage/async-storage@1.23.1
-```
-
-### Android Studio Error (Windows users)
-
-If you're facing issues with Android Studio on Windows:
-
-1. Make sure you've installed Android Studio
-2. Add the Android SDK to your PATH environment variable
-3. Set the ANDROID_HOME environment variable to your Android SDK location
-
-### Expo Issues
-
-If Expo is crashing or having issues:
-
-1. Kill all running node/expo processes
-2. Clear the Expo cache: `npx expo start -c`
-3. Try using Expo Go on your device instead of an emulator
-
-## Development Notes
-
-- The app uses Firebase for authentication and data storage
-- User profiles, workouts, and training programs are stored in Firestore
-- Local fallback data is used when Firebase is unavailable
-- The app supports both metric and imperial units
+- Firebase - Authentication and database
+- Google Maps - Route visualization and tracking
+- (Optional) Weather API - For weather conditions during workouts
 
 ## Contributing
 
-1. Create a feature branch from develop
-2. Make your changes
-3. Test thoroughly
-4. Submit a pull request 
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Expo Team for their excellent React Native tooling
+- Firebase for authentication and database services
+- The open-source community for various packages used in this project 
